@@ -1,7 +1,7 @@
 #ifndef __sdring_h_
 #define __sdring_h_
 #define __sdring_h_created_ 20251225_
-#define __sdring_h_updated_ 20260418_
+#define __sdring_h_updated_ 20260421_
 
 /* Semantic:
 
@@ -19,7 +19,7 @@ indicate its raw-length.
 For operator[], a negative value mean counting backward from sdring end(like Python).
 */
 
-// Hint: Extra helper: makeTstring.h
+// Hint: Extra helper: makeTsdring.h
 
 template<typename T_CHAR>
 class sdring
@@ -116,6 +116,10 @@ public:
 		return m_buf; 
 	}
 	operator T_CHAR* & () { 
+		return getbuf();
+	}
+
+	operator T_CHAR const* const& () {
 		return getbuf();
 	}
 
