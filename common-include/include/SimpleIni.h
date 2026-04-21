@@ -409,13 +409,13 @@ CIniOp::read_initext(const TCHAR *initext, int inilen)
 			continue;
 		}
 
-		// Check if it is key=value pair
-		vaDBG3(_T("&linetext = %p"), &linetext); // just debug
-
 		int eqs_pos = linetext.findchar('=');
 		if(eqs_pos>=0)
 		{
-			StringSplitter<const TCHAR*, Is_equal_sign, StringSplitter_IsSpaceTab>
+			StringSplitter<
+				TCHAR* const, // MUST NOT write `TCHAR const*`, would crash on GCC (eg. gcc 9.4)
+				Is_equal_sign, StringSplitter_IsSpaceTab
+				>
 				spgkeyval(linetext, 0, linetext.rawlen());
 			
 			int keylen = 0;
